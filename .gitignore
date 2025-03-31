@@ -13,6 +13,10 @@ _minted*
 *.idx
 *.ilg
 *.ind
+*.nav
+*.xdv
+*.snm
+*.vrb
 presentation.template.chl
 presentation.template.lof
 presentation.template.lot

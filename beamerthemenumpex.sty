@@ -39,6 +39,7 @@
 
 \RequirePackage{etoolbox}
 \RequirePackage{pgfplots}
+\pgfplotsset{compat=newest}
 
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
@@ -103,7 +104,7 @@
   \setbeamercolor{background canvas}{parent=palette tertiary}
   \begin{frame}{#1}
     \centering
-    \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{nblue}{\scshape #2}\vfill
+    \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{nblue}{\bfseries #2}\vfill
   \end{frame}
   \endgroup
 }
@@ -144,7 +145,7 @@
     \begin{tikzpicture}[remember picture,overlay]
       \node[xshift=0.2cm,yshift=0, anchor=north west, inner sep=0] at (current page.north west) {\includegraphics[height=1.3cm]{images/rf.png}~\includegraphics[height=1.3cm]{images/f2030.png}};
       \node[xshift=-0.5cm,yshift=-0.2cm, anchor=north east, inner sep=0] at (current page.north east) {\includegraphics[height=1cm]{images/cea.png}~~~\includegraphics[height=1cm]{images/cnrs.png}~~~\includegraphics[height=0.9cm]{images/inria.png}};
-      
+
       \node[xshift=0cm,yshift=0, anchor=south, inner sep=0] at (current
       page.south)
       {\includegraphics[width=\paperwidth,height=0.9\textheight]{images/back2.jpg}};
@@ -152,11 +153,11 @@
       page.center)
       {\usebeamerfont{section title}\usebeamercolor[fg]{section title}\insertsection};
     \end{tikzpicture}
-    
-    
-    
+
+
+
     % \node[anchor=south west, fg, inner sep=0pt, text width=\textwidth] at (0pt,10pt) {\insertsection};
-    
+
   \end{frame}
   % \endgroup
 }
@@ -173,10 +174,21 @@
 \usenavigationsymbolstemplate{}
 \setbeamertemplate{footline}
 {%
-  \begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
-    \includegraphics[height=0.6cm]{images/cea.png}~~~\includegraphics[height=0.6cm]{images/cnrs.png}~~~\includegraphics[height=0.5cm]{images/inria.png}\hfill\usebeamerfont{page number in head/foot}%
-    \insertframenumber%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.2222\paperwidth, ht=3ex, dp=3ex, center]{structure}%
+    {\raisebox{-0.5\baselineskip}{\includegraphics[height=0.6cm]{images/cea.png}~~~\includegraphics[height=0.6cm]{images/cnrs.png}~~~\includegraphics[height=0.5cm]{images/inria.png}}}
   \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5556\paperwidth, ht=3ex, dp=3ex, center]{structure}%
+    \usebeamerfont{title in head/foot}\insertshorttitle%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.16665\paperwidth, ht=3ex, dp=3ex, center]{structure}%
+    \hfill\usebeamerfont{author in head/foot}\insertshortauthor%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.05555\paperwidth, ht=3ex, dp=3ex, center]{structure}%
+    \hfill\usebeamerfont{page number in head/foot}\insertframenumber%
+  \end{beamercolorbox}}%
+  \vskip0pt%
 }
 
 \setbeamertemplate{footnote}
@@ -217,7 +229,7 @@
   \begin{beamercolorbox}[colsep*=.75ex]{block body}%
     \vspace{-\baselineskip}\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
 }
-\defbeamertemplate*{block end}{numpex}  
+\defbeamertemplate*{block end}{numpex}
 {\end{beamercolorbox}%
   {\parskip0pt\par}%
   \ifbeamercolorempty[bg]{block title}
@@ -244,7 +256,7 @@
   \begin{beamercolorbox}[colsep*=.75ex]{block body example}%
     \vspace{-\baselineskip}\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
 }
-\defbeamertemplate*{block example end}{numpex} 
+\defbeamertemplate*{block example end}{numpex}
 {\end{beamercolorbox}%
   {\parskip0pt\par}%
   \ifbeamercolorempty[bg]{block title}
@@ -278,12 +290,12 @@
 
 \usepackage[procnames]{listings}
 \lstset{ %
-  backgroundcolor=\color{black!3},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\code\footnotesize,      % the size of the fonts that are used for the code
+  backgroundcolor=\color{black!3},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\code\footnotesize,    % the size of the fonts that are used for the code
   breakatwhitespace=false,          % sets if automatic breaks should only happen at whitespace
   breaklines=true,                  % sets automatic line breaking
   captionpos=b,                     % sets the caption-position to bottom
-  commentstyle=\color{black!70},      % comment style
+  commentstyle=\color{black!70},    % comment style
   extendedchars=true,               % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
   frame=single,                     % adds a frame around the code
   keepspaces=true,                  % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
@@ -292,7 +304,7 @@
   language=[95]fortran,             % the language of the code
   numbers=none,                     % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                    % how far the line-numbers are from the code
-  numberstyle=\tiny\color{black!20}, % the style that is used for the line-numbers
+  numberstyle=\tiny\color{black!20},% the style that is used for the line-numbers
   rulecolor=\color{nblue},          % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                 % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,           % underline spaces within strings only
@@ -300,7 +312,7 @@
   stepnumber=2,                     % the step between two line-numbers. If it's 1, each line will be numbered
   stringstyle=\color{ngreen},       % string literal style
   tabsize=2,                        % sets default tabsize to 2 spaces
-  title=\lstname,                    % show the filename of files included with \lstinputlisting; also try caption instead of title
+  title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
   procnamekeys={call}
 }
 

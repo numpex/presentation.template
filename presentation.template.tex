@@ -1,5 +1,4 @@
 \documentclass[aspectratio=169]{beamer}
-% \documentclass{beamer}
 
 \usetheme{numpex}
 
@@ -22,17 +21,17 @@
 \begin{frame}[fragile]{NumPEx theme}
 
   The NumPEx theme is a Beamer theme with minimal visual noise
-  inspired by the 
+  inspired by the
 
   \vspace{0.1cm}
-  
+
   \begin{center}
     \alert{\href{https://www.info.gouv.fr/marque-de-letat}{Charte
         graphique de l'etat Français}}
   \end{center}
 
   \vspace{0.4cm}
-  
+
   Enable the theme by loading
 
 \begin{verbatim}
@@ -41,11 +40,11 @@
 
   \vspace{0.4cm}
 
-  Note, that you have to have \emph{Marianne} font and XeTeX
-  installed to enjoy this wonderful typography. You can find the font
-  
+  Note, that you have to have \emph{Marianne} font and XeTeX.
+  Install it to enjoy this wonderful typography. You can find the font
+
   \vspace{0.1cm}
-  
+
   \begin{center}
     \alert{\href{https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-de-l-identite-de-l-etat/typographie/}{here}}
   \end{center}
@@ -53,6 +52,7 @@
 
 \begin{frame}[fragile]
   \frametitle{Sections}
+
   Sections group slides of the same topic
 
 \begin{verbatim}
@@ -75,7 +75,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \column{0.5\textwidth}
       Items
       \begin{itemize}
-        \item Milk \item Eggs \item Potatos
+        \item Milk \item Eggs \item Potatoes
       \end{itemize}
 
     \column{0.5\textwidth}
@@ -126,7 +126,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
   \end{exampleblock}
 
 
-  
+
 \end{frame}
 \begin{frame}{Math}
   \begin{equation*}
@@ -138,10 +138,10 @@ text, \alert{accent} parts or show \textbf{bold} results.
 \begin{center}
   \begin{tikzpicture}[domain=0:4]
     \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-    
+
     \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
     \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-    
+
     \draw[color=red]    plot (\x,\x)             node[right] {$f(x) =x$};
     % \x r means to convert '\x' from degrees to _r_adians:
     \draw[color=blue]   plot (\x,{sin(\x r)})    node[right] {$f(x) = \sin x$};
@@ -166,7 +166,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
 
 
 \begin{frame}[fragile]{Bar charts}
-
+  \vspace{-0.8cm}
   \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
@@ -182,19 +182,19 @@ text, \alert{accent} parts or show \textbf{bold} results.
   \addplot [color=nred, fill=nred!30]
   coordinates {(1930,50e6) (1940,33e6)
     (1950,40e6) (1960,50e6) (1970,70e6)};
-  
+
   \addplot [color=nblue, fill=nblue!30]
-  coordinates {(1930,38e6) (1940,42e6) 
+  coordinates {(1930,38e6) (1940,42e6)
     (1950,43e6) (1960,45e6) (1970,65e6)};
-  
+
   \addplot [color=ngreen, fill=ngreen!30]
-  coordinates {(1930,15e6) (1940,12e6) 
+  coordinates {(1930,15e6) (1940,12e6)
     (1950,13e6) (1960,25e6) (1970,35e6)};
-  
-  \addplot[red,sharp plot,update limits=false] 
-  coordinates {(1910,4.3e7) (1990,4.3e7)} 
+
+  \addplot[red,sharp plot,update limits=false]
+  coordinates {(1910,4.3e7) (1990,4.3e7)}
   node[above] at (axis cs:1950,4.3e7) {Houses};
-  
+
   \legend{Far,Near,Here,Annot}
 \end{axis}
 \end{tikzpicture}  \end{center}
@@ -206,7 +206,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
 \begin{frame}[fragile]{Code}
 
   I love Fortran!
-  
+
   \vspace{0.5cm}
 
 \begin{lstlisting}[basicstyle=\tt\scriptsize, showlines=true]
@@ -235,7 +235,7 @@ end program pippo
 
   Get the source of this theme and the demo presentation from
 
-  \begin{center}\url{http://somewhere}\end{center}
+  \begin{center}\url{https://github.com/numpex/presentation.template/}\end{center}
 
 \end{frame}
 
