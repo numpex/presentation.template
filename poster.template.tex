@@ -1,0 +1,105 @@
+\documentclass[final]{beamer}
+\usepackage[size=a0,scale=1.4]{beamerposter}
+\usetheme{numpex}
+
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% 1) Set a poster background
+\setbeamertemplate{background}{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node at (current page.center)
+      {\includegraphics[width=\paperwidth,height=\paperheight]{images/back1.jpg}};
+  \end{tikzpicture}
+}
+
+% 2) Override block colors for a white background
+\setbeamercolor{block title}{bg=white, fg=blue!60!black}
+\setbeamercolor{block body}{bg=white, fg=black}
+
+% 3) Headline with a larger white rectangle (5cm high) and updated logos (3cm high)
+\setbeamertemplate{headline}{
+  \begin{tikzpicture}[remember picture,overlay]
+    % White background for the headline (now 5cm tall)
+    \fill[white] (current page.north west) rectangle
+                 ([yshift=-5cm] current page.north east);
+
+    % Left logos
+    \node[anchor=north west, inner sep=0.5cm] at (current page.north west)
+      {%
+        \includegraphics[height=3cm]{images/rf.png}\hspace{0.3cm}%
+        \includegraphics[height=3cm]{images/f2030.png}%
+      };
+
+    % Right logos
+    \node[anchor=north east, inner sep=0.5cm] at (current page.north east)
+      {%
+        \includegraphics[height=3cm]{images/cea.png}\hspace{0.3cm}%
+        \includegraphics[height=3cm]{images/inria.png}\hspace{0.3cm}%
+        \includegraphics[height=3cm]{images/cnrs.png}%
+      };
+
+    % Title in black, positioned in the white area.
+    % (Adjusted yshift so the title is roughly centered vertically in the white bar)
+    \node[anchor=south, yshift=0.5cm] at ([yshift=-2.5cm] current page.north)
+      {\parbox{\paperwidth}{\centering
+      {\usebeamerfont{title}\color{black}\inserttitle\par}}};
+  \end{tikzpicture}
+}
+
+\title{Your Poster Title}
+\author{Your Name}
+\institute{Your Institute}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[t]{}
+  % Leave space for the headline (5cm tall).
+  \vspace*{5cm}
+
+  % Center everything within this frame
+  \begin{center}
+    % A minipage that is 90% of the poster width
+    \begin{minipage}{0.9\paperwidth}
+      % Now the columns fill the minipage width, which is \textwidth inside the minipage
+      \begin{columns}[t,totalwidth=\textwidth]
+        
+        \column{0.3\textwidth}
+          \begin{block}{Introduction}
+            Brief context and overview of your work.
+          \end{block}
+          \vspace{1cm} % Add s
+          \begin{block}{Objectives}
+            List your objectives or research questions here.
+          \end{block}
+
+        \column{0.3\textwidth}
+          \begin{block}{Methodology}
+            Describe your methods or approach.
+          \end{block}
+          \vspace{1cm} % Add s
+          \begin{block}{Figures}
+            Include figures or diagrams here.
+          \end{block}
+
+        \column{0.3\textwidth}
+          \begin{block}{Results}
+            Present your main results and key findings.
+          \end{block}
+          \vspace{1cm} % Add some vertical space
+          \begin{block}{Conclusion \& Future Work}
+            Summarize your conclusions and outline future directions.
+          \end{block}
+          \vspace{1cm} % Add s
+          \begin{block}{References}
+            Provide references or acknowledgments.
+          \end{block}
+
+      \end{columns}
+    \end{minipage}
+  \end{center}
+\end{frame}
+
+\end{document}
