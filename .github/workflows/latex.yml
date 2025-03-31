@@ -83,6 +83,11 @@ jobs:
         run: |
           latexmk -shell-escape -pdf -file-line-error -halt-on-error -interaction=nonstopmode  ${{ needs.workflow-setup.outputs.tex }}
 
+      - name: Compile Poster 
+        if: ${{ needs.workflow-setup.outputs.runner == 'self-texlive' }}
+        run: |
+          latexmk -shell-escape -pdf -file-line-error -halt-on-error -interaction=nonstopmode  poster.template.tex
+
       - name: Rename PDF
         run: mv ${{ needs.workflow-setup.outputs.prefix }}.pdf ${{ needs.workflow-setup.outputs.pdf }}
 
@@ -96,6 +101,7 @@ jobs:
             ./*.gin
             ./*.bbl
             ./${{ needs.workflow-setup.outputs.pdf }}
+            ./poster.template.pdf
             ./README.adoc
             ./hooks*
             ./img*
@@ -142,6 +148,12 @@ jobs:
         run: |
           latexmk -shell-escape -pdf -file-line-error -halt-on-error -interaction=nonstopmode  ${{ needs.workflow-setup.outputs.tex }}
         working-directory: ${{ github.workspace }}/artifact
+      -
+        name: Check compilation of poster from artifact
+        if: ${{ needs.workflow-setup.outputs.runner == 'self-texlive' }}
+        run: |
+          latexmk -shell-escape -pdf -file-line-error -halt-on-error -interaction=nonstopmode  poster.template.tex
+        working-directory: ${{ github.workspace }}/artifact        
 
   release:
     needs: [workflow-setup,build_latex, check]
@@ -174,4 +186,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             artifact/${{ needs.workflow-setup.outputs.prefixwithref }}.pdf
+            artifact/poster.template.pdf
             ${{ needs.workflow-setup.outputs.prefixwithref }}.tar.gz
