@@ -88,6 +88,22 @@ delete_release() {
     echo "Release $VERSION deleted successfully."
 }
 
+# Function to compile with latexmk and xelatex
+compile() {
+    DOC=$1
+    if [ -z "$DOC" ]; then
+        echo "Usage: $0 build <document.tex>"
+        exit 1
+    fi
+
+    OUTDIR="build"
+    mkdir -p "$OUTDIR"
+    
+    # Compile using latexmk with xelatex and the desired options
+#    latexmk -synctex=1 -interaction=nonstopmode -file-line-error -xelatex -outdir="$OUTDIR" "$DOC"
+    latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir="$OUTDIR" "$DOC"
+}
+
 # Main script logic
 case "$1" in
     setup)
@@ -102,11 +118,15 @@ case "$1" in
     delete)
         delete_release "$2"
         ;;
+    build)
+        compile "$2"
+        ;;
     *)
         echo "Usage: $0 {setup|create|list|delete} [version]"
         echo "  setup   : Setup hooks for commit, checkout, and merge"
         echo "  create  : Create a new release with the provided version"
         echo "  list    : List all existing releases"
+        echo "  build   : Compile the TeX document using latexmk and xelatex"
         echo "  delete  : Delete the release with the provided version"
         echo "  version : Optional argument specifying the version for create and delete commands"
         exit 1
