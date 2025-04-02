@@ -105,6 +105,7 @@ jobs:
             ./README.adoc
             ./hooks*
             ./img*
+            ./fonts/*
             ./dat*
             ./*.png
             ./a.cli
