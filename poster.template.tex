@@ -25,6 +25,7 @@
   tabsize=2                       % Set the tab size
 }
 
+
 % 1) Set a poster background
 \setbeamertemplate{background}{
   \begin{tikzpicture}[remember picture,overlay]
@@ -97,24 +98,18 @@
       {\usebeamerfont{footline}\usebeamercolor[fg]{footline}\insertinstitute \quad \insertdate}}};
   \end{tikzpicture}
 }
-% In your preamble, after loading beamer:
-\usepackage{xcolor} % For color manipulation
-
-% Define a nice purple or pink with partial transparency
-% The color is tinted purple with 30% opacity over white
-\definecolor{BlockTitleBG}{HTML}{8E44AD}  % Or any color you like
-
-% A softer purple background for the block title, black text
-\setbeamercolor{block title}{
-  use=normal text,
-  bg=purple!15!white,  % 15% purple + 85% white
-  fg=black
+\setbeamercolor{block title}{ use=normal text,  bg=purple!15!white, fg=black }
+\setbeamertemplate{block begin}{
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,shadow=true,rounded=true]{block title}%
+    \usebeamerfont{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{block body}%
+    \usebeamerfont{block body}%
 }
-% Similarly, for the block body, you can keep white or give it a slight tint
-\setbeamercolor{block body}{
-  bg=white,
-  fg=black
+\setbeamertemplate{block end}{
+  \end{beamercolorbox}
 }
+
 
 \title{A Poster Beamer Theme for NumPEx}
 \author{Alfredo Buttari, Christophe Prud'homme}
@@ -132,7 +127,7 @@
       \begin{columns}[t,totalwidth=\textwidth]
         
         % Column 1
-        \column{0.3\textwidth}
+        \column{0.32\textwidth}
           \begin{block}{Theme Overview}
             The NumPEx theme is a Beamer theme with minimal visual noise inspired by the HSRM theme. It emphasizes a clean design with elegant typography (using the Marianne font, so XeTeX is required).  
             \vspace{0.3cm}
@@ -163,7 +158,7 @@
           \end{block}
         
         % Column 2
-        \column{0.3\textwidth}
+        \column{0.32\textwidth}
           \begin{block}{Lists, Descriptions \& Animation}
             \textbf{Lists:}
             \begin{itemize}
@@ -205,23 +200,24 @@
           \end{block}
         
         % Column 3
-        \column{0.3\textwidth}
+        \column{0.32\textwidth}
           \begin{block}{Blocks \& Math}
             \begin{block}{Simple Block}
               Hello
             \end{block}
-            \begin{exampleblock}{Example Block}
-              Hello
-            \end{exampleblock}
+            
             \vspace{0.3cm}
             \textbf{Mathematics:}
             \[
               e = \lim_{n\to \infty} {\left(1 + \frac{1}{n}\right)}^n
             \]
           \end{block}
-          
           \vspace{0.5cm}
-          
+          \begin{exampleblock}{Example Block}
+            Hello
+          \end{exampleblock}
+     
+          \vspace{0.5cm}
           \begin{block}{Line Plots \& Bar Charts}
             \textbf{Line Plot:}
             \begin{center}
@@ -262,23 +258,25 @@
           
           \vspace{0.5cm}
           
-          \begin{block}{Code \& Conclusion}
-            \textbf{Code Example:}
+          \begin{exampleblock}{Code Example}
             \begin{lstlisting}[basicstyle=\tt\scriptsize, showlines=true]
-program pippo
-  integer, parameter :: m=10, n=5
-  real(kind(1.d0)), allocatable :: a(:,:)
-  allocate(a(m,n))
-  call random_number(a)
-  call do_something(a)
-  write(*,'("Hello world")')
-  stop
-end program pippo
-            \end{lstlisting}
-            \vspace{0.3cm}
-            \textbf{Conclusion:}\\
+              program pippo
+                integer, parameter :: m=10, n=5
+                real(kind(1.d0)), allocatable :: a(:,:)
+                allocate(a(m,n))
+                call random_number(a)
+                call do_something(a)
+                write(*,'("Hello world")')
+                stop
+              end program pippo
+                          \end{lstlisting}
+          \end{exampleblock}
+
+          \begin{block}{Conclusion}
             Get the source of this theme and the demo presentation from:
-            \begin{center}\url{https://github.com/numpex/presentation.template/}\end{center}
+            \begin{center}\small
+              \url{https://github.com/numpex/presentation.template/}
+            \end{center}
           \end{block}
           
       \end{columns}
