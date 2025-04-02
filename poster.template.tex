@@ -35,6 +35,7 @@
   \end{tikzpicture}
 }
 
+
 % 2) Override block colors for a white background
 \setbeamercolor{block title}{bg=white, fg=blue!60!black}
 \setbeamercolor{block body}{bg=white, fg=black}
@@ -61,9 +62,11 @@
       };
 
     % Title (centered in the white area)
-    \node[anchor=south, yshift=0.5cm] at ([yshift=-4cm] current page.north)
-      {\parbox{\paperwidth}{\centering
-      {\usebeamerfont{title}\color{black}\inserttitle\par}}};
+    \node[anchor=south, yshift=0.5cm] at ([yshift=-5cm] current page.north)
+    {\parbox{\paperwidth}{\centering
+      {\usebeamerfont{title}\color{black}\inserttitle\par\vspace{0.3cm}
+       {\usebeamerfont{author}\color{black}\insertauthor\par}}
+    }};
   \end{tikzpicture}
 }
 
@@ -94,9 +97,27 @@
       {\usebeamerfont{footline}\usebeamercolor[fg]{footline}\insertinstitute \quad \insertdate}}};
   \end{tikzpicture}
 }
+% In your preamble, after loading beamer:
+\usepackage{xcolor} % For color manipulation
 
-\title{A New Beamer Theme for NumPEx}
-\author{Alfredo Buttari}
+% Define a nice purple or pink with partial transparency
+% The color is tinted purple with 30% opacity over white
+\definecolor{BlockTitleBG}{HTML}{8E44AD}  % Or any color you like
+
+% A softer purple background for the block title, black text
+\setbeamercolor{block title}{
+  use=normal text,
+  bg=purple!15!white,  % 15% purple + 85% white
+  fg=black
+}
+% Similarly, for the block body, you can keep white or give it a slight tint
+\setbeamercolor{block body}{
+  bg=white,
+  fg=black
+}
+
+\title{A Poster Beamer Theme for NumPEx}
+\author{Alfredo Buttari, Christophe Prud'homme}
 \institute{Institute or Miscellaneous Information}
 \date{\today}
 
