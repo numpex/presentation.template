@@ -1,10 +1,6 @@
 \documentclass[final]{beamer}
 \usepackage[size=a0,scale=1.4]{beamerposter}
 \usetheme{numpex}
-\usepackage{svg}
-\svgsetup{
-  inkscapearea=page
-}
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -29,10 +25,7 @@
 % 1) Set a poster background
 \setbeamertemplate{background}{
   \begin{tikzpicture}[remember picture,overlay]
-    \node at (current page.center)
-      {\includesvg[height=\paperheight, keepaspectratio=false]{images/NumPEx_1.svg}};
-
-  %    {\includegraphics[width=\paperwidth,height=\paperheight]{images/back1.jpg}};
+    \node at (current page.center)      {\includegraphics[height=\paperheight, keepaspectratio=false]{images/NumPEx_1.pdf}};
   \end{tikzpicture}
 }
 
@@ -285,3 +278,9 @@
 \end{frame}
 
 \end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: xetex
+%%% TeX-command-extra-options: "--synctex=1"
+%%% End:
