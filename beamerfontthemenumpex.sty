@@ -1,40 +1,87 @@
-% Beamer mtheme
-%
-% Copyright 2014 Matthias Vogelgesang
-% Licensed under CC-BY-SA 4.0 International.
-%
-% The initial template comes from the HSRM beamer theme by Benjamin Weiss, which
-% you can find at https://github.com/hsrmbeamertheme/hsrmbeamertheme.
-%
-
 \ProvidesPackage{beamerfontthemenumpex}
 
 \ifxetex
 \RequirePackage{fontspec}
 \defaultfontfeatures{Mapping=tex-text}
-\setsansfont[BoldFont={Marianne Bold}]{Marianne}
-\newfontfamily\ExtraLight{Marianne Light}
-\newfontfamily\Light{Marianne Light}
-\newfontfamily\Book{Marianne}
-\newfontfamily\Medium{Marianne Medium}
-\newfontfamily\code{Courier}
-\AtBeginEnvironment{tabular}{\setsansfont[BoldFont={Marianne}, Numbers={Monospaced}]{Marianne}}
+
+% Marianne fonts (for sans-serif parts)
+\setsansfont[
+  Path = fonts/Marianne/desktop/,
+  BoldFont = {Marianne-Bold.otf},
+  Extension = .otf
+]{Marianne-Regular.otf}
+
+\newfontfamily\ExtraLight[
+  Path = fonts/Marianne/desktop/,
+  Extension = .otf
+]{Marianne-Light.otf}
+
+\newfontfamily\Light[
+  Path = fonts/Marianne/desktop/,
+  Extension = .otf
+]{Marianne-Light.otf}
+
+\newfontfamily\Book[
+  Path = fonts/Marianne/desktop/,
+  Extension = .otf
+]{Marianne-Regular.otf}
+
+\newfontfamily\Medium[
+  Path = fonts/Marianne/desktop/,
+  Extension = .otf
+]{Marianne-Medium.otf}
+
+% Use RobotoMono for monospaced text (for code and \tt)
+\setmonofont[
+  Path = fonts/Roboto/static/,
+  BoldFont = {RobotoMono-Bold.ttf},
+  ItalicFont = {RobotoMono-Italic.ttf},
+  BoldItalicFont = {RobotoMono-BoldItalic.ttf},
+  Extension = .ttf
+]{RobotoMono-Regular.ttf}
+
+\AtBeginEnvironment{tabular}{\setsansfont[
+  Path = fonts/Marianne/desktop/,
+  BoldFont = {Marianne-Bold.otf},
+  Extension = .otf,
+  Numbers = {Monospaced}
+]{Marianne-Regular.otf}}
+
 \setbeamerfont{title}{family=\Book, size=\huge}
 \setbeamerfont{author}{family=\ExtraLight, size=\small}
 \setbeamerfont{date}{family=\ExtraLight, size=\small}
 \setbeamerfont{section title}{family=\Book, size=\huge}
 \setbeamerfont{block title}{family=\Book, size=\normalsize}
-\setbeamerfont{block title alerted}{family=\Book,size=\normalsize}
+\setbeamerfont{block title alerted}{family=\Book, size=\normalsize}
 \setbeamerfont{subtitle}{family=\Light, size=\fontsize{12}{14}}
 \setbeamerfont{frametitle}{family=\Book, size=\large}
 \setbeamerfont{caption}{size=\small}
 \setbeamerfont{caption name}{family=\Book}
 \setbeamerfont{description item}{family=\Book}
 \setbeamerfont{page number in head/foot}{size=\scriptsize}
+
+\usefonttheme{professionalfonts}
+\setsansfont[
+  Path = fonts/Marianne/desktop/,
+  BoldFont = {Marianne-Bold.otf},
+  Extension = .otf
+]{Marianne-Regular.otf}
+
+\setbeamerfont{title}{family={\sffamily}, size=\huge}
+\setbeamerfont{author}{family={\sffamily}, size=\small}
+\setbeamerfont{date}{family={\sffamily}, size=\small}
+\setbeamerfont{section title}{family={\sffamily}, size=\huge}
+\setbeamerfont{block title}{family={\sffamily}, size=\normalsize}
+\setbeamerfont{block title alerted}{family={\sffamily}, size=\normalsize}
+\setbeamerfont{subtitle}{family={\sffamily}, size=\fontsize{12}{14}}
+\setbeamerfont{frametitle}{family={\sffamily}, size=\large}
+\setbeamerfont{caption}{family={\sffamily}, size=\small}
+\setbeamerfont{caption name}{family={\sffamily}}
+\setbeamerfont{description item}{family={\sffamily}}
+\setbeamerfont{page number in head/foot}{family={\sffamily}, size=\scriptsize}
+
 \else
 \setbeamerfont{section title}{family=\tt, size=\Large}
 \setbeamerfont{title}{family=\tt, size=\Large}
 \AtBeginEnvironment{tabular}{\tt}
 \fi
-
-% \linespread{1.15}

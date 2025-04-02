@@ -100,8 +100,8 @@ compile() {
     mkdir -p "$OUTDIR"
     
     # Compile using latexmk with xelatex and the desired options
-#    latexmk -synctex=1 -interaction=nonstopmode -file-line-error -xelatex -outdir="$OUTDIR" "$DOC"
-    latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir="$OUTDIR" "$DOC"
+    latexmk -shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -f -xelatex -outdir="$OUTDIR" "$DOC"
+#    latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir="$OUTDIR" "$DOC"
 }
 
 # Main script logic

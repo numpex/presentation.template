@@ -1,7 +1,10 @@
 \documentclass[final]{beamer}
 \usepackage[size=a0,scale=1.4]{beamerposter}
 \usetheme{numpex}
-
+\usepackage{svg}
+\svgsetup{
+  inkscapearea=page
+}
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -9,12 +12,26 @@
 \usepackage{booktabs}
 \usepackage{url}
 \usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\scriptsize, % Set the font and size for code listings
+  breaklines=true,                  % Automatically break lines
+  breakatwhitespace=true,          % Break lines at whitespace
+  numbers=left,                    % Add line numbers on the left
+  numberstyle=\tiny,               % Set the style for line numbers
+  frame=single,                   % Add a frame around the code
+  showspaces=false,               % Do not show spaces
+  showstringspaces=false,         % Do not show spaces in strings
+  showtabs=false,                 % Do not show tabs
+  tabsize=2                       % Set the tab size
+}
 
 % 1) Set a poster background
 \setbeamertemplate{background}{
   \begin{tikzpicture}[remember picture,overlay]
     \node at (current page.center)
-      {\includegraphics[width=\paperwidth,height=\paperheight]{images/back1.jpg}};
+      {\includesvg[height=\paperheight, keepaspectratio=false]{images/NumPEx_1.svg}};
+
+  %    {\includegraphics[width=\paperwidth,height=\paperheight]{images/back1.jpg}};
   \end{tikzpicture}
 }
 
@@ -34,7 +51,7 @@
         \includegraphics[height=3cm]{images/rf.png}\hspace{0.3cm}%
         \includegraphics[height=3cm]{images/f2030.png}%
       };
-    
+
     % Right logos
     \node[anchor=north east, inner sep=0.5cm] at (current page.north east)
       {%
@@ -42,9 +59,9 @@
         \includegraphics[height=3cm]{images/inria.png}\hspace{0.3cm}%
         \includegraphics[height=3cm]{images/cnrs.png}%
       };
-    
+
     % Title (centered in the white area)
-    \node[anchor=south, yshift=0.5cm] at ([yshift=-2.5cm] current page.north)
+    \node[anchor=south, yshift=0.5cm] at ([yshift=-4cm] current page.north)
       {\parbox{\paperwidth}{\centering
       {\usebeamerfont{title}\color{black}\inserttitle\par}}};
   \end{tikzpicture}
@@ -187,36 +204,39 @@
           \begin{block}{Line Plots \& Bar Charts}
             \textbf{Line Plot:}
             \begin{center}
-              \begin{tikzpicture}[domain=0:4, scale=0.7]
+              \begin{tikzpicture}[domain=0:4, scale=1.5, every node/.style={scale=0.7}]
                 \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-                \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-                \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-                \draw[color=red] plot (\x,\x) node[right] {$f(x)=x$};
-                \draw[color=blue] plot (\x,{sin(\x r)}) node[right] {$f(x)=\sin x$};
-                \draw[color=orange] plot (\x,{0.05*exp(\x)}) node[right] {$f(x)=\frac{1}{20}e^x$};
+                \draw[->] (-0.2,0) -- (4.2,0) node[right, font=\scriptsize] {$x$};
+                \draw[->] (0,-1.2) -- (0,4.2) node[above, font=\scriptsize] {$f(x)$};
+                \draw[color=red] plot (\x,\x) node[right, font=\scriptsize] {$f(x)=x$};
+                \draw[color=blue] plot (\x,{sin(\x r)}) node[right, font=\scriptsize] {$f(x)=\sin x$};
+                \draw[color=orange] plot (\x,{0.05*exp(\x)}) node[right, font=\scriptsize] {$f(x)=\frac{1}{20}e^x$};
               \end{tikzpicture}
             \end{center}
             \vspace{0.3cm}
             \textbf{Bar Chart:}
             \begin{center}
-              \begin{tikzpicture}
+              \begin{tikzpicture}[scale=1.5, every node/.style={scale=0.8}]
                 \begin{axis}[
                   x tick label style={/pgf/number format/1000 sep=},
-                  ylabel=Population,
+                  ylabel={\scriptsize Population},
                   enlargelimits=0.15,
-                  legend style={at={(0.5,-0.15)},anchor=north,legend columns=-1},
+                  legend style={at={(0.5,-0.15)},anchor=north,legend columns=-1, font=\scriptsize},
                   ybar,
-                  bar width=7pt,
+                  bar width=5pt,
+                  tick label style={font=\scriptsize},
+                  label style={font=\scriptsize},
                 ]
                   \addplot [color=red, fill=red!30] coordinates {(1930,50e6) (1940,33e6) (1950,40e6) (1960,50e6) (1970,70e6)};
                   \addplot [color=blue, fill=blue!30] coordinates {(1930,38e6) (1940,42e6) (1950,43e6) (1960,45e6) (1970,65e6)};
                   \addplot [color=green, fill=green!30] coordinates {(1930,15e6) (1940,12e6) (1950,13e6) (1960,25e6) (1970,35e6)};
-                  \addplot[red,sharp plot,update limits=false] coordinates {(1910,4.3e7) (1990,4.3e7)} 
-                    node[above] at (axis cs:1950,4.3e7) {Houses};
-                  \legend{Far,Near,Here,Annot}
+                  \addplot[red,sharp plot,update limits=false] coordinates {(1910,4.3e7) (1990,4.3e7)}
+                    node[above, font=\scriptsize] at (axis cs:1950,4.3e7) {Houses};
+                  \legend{{\scriptsize Far},{\scriptsize Near},{\scriptsize Here},{\scriptsize Annot}}
                 \end{axis}
               \end{tikzpicture}
             \end{center}
+          
           \end{block}
           
           \vspace{0.5cm}
