@@ -28,3 +28,5 @@ build/
 *.dvi
 poster.template.pdf
 *.html
+__MACOSX/
+.DS_Store
