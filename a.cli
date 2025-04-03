@@ -88,6 +88,47 @@ delete_release() {
     echo "Release $VERSION deleted successfully."
 }
 
+# Function to compile with latexmk and xelatex
+compile() {
+    DOC=$1
+    if [ -z "$DOC" ]; then
+        echo "Usage: $0 build <document.tex>"
+        exit 1
+    fi
+
+    OUTDIR="build"
+    mkdir -p "$OUTDIR"
+    
+    # Compile using latexmk with xelatex and the desired options
+    latexmk -synctex=1 -interaction=nonstopmode -file-line-error -f -xelatex -outdir="$OUTDIR" "$DOC"
+
+}
+
+# Function to install LaTeX fonts (Marianne and Roboto Mono)
+install_fonts() {
+    FONTSDIR="fonts"
+    mkdir -p "$FONTSDIR"
+
+    # Install Marianne fonts
+    MARIENNE_URL="https://www.systeme-de-design.gouv.fr/uploads/Marianne_fd0ba9c190.zip"
+    MARIENNE_ZIP="$FONTSDIR/Marianne_fd0ba9c190.zip"
+    echo "Downloading Marianne fonts..."
+    wget -O "$MARIENNE_ZIP" "$MARIENNE_URL"
+    echo "Extracting Marianne fonts..."
+    unzip -o "$MARIENNE_ZIP" -d "$FONTSDIR/"
+    rm "$MARIENNE_ZIP"
+
+    # Install Roboto Mono fonts
+    ROBOTOMONO_URL="https://fonts.google.com/download?family=Roboto+Mono"
+    ROBOTOMONO_ZIP="$FONTSDIR/RobotoMono.zip"
+    echo "Downloading Roboto Mono fonts..."
+    wget -O "$ROBOTOMONO_ZIP" "$ROBOTOMONO_URL"
+    echo "Extracting Roboto Mono fonts..."
+    unzip -o "$ROBOTOMONO_ZIP" -d "$FONTSDIR/RobotoMono"
+
+    echo "Fonts installed successfully in $FONTSDIR."
+}
+
 # Main script logic
 case "$1" in
     setup)
@@ -102,11 +143,19 @@ case "$1" in
     delete)
         delete_release "$2"
         ;;
+    build)
+        compile "$2"
+        ;;
+    installfonts)
+        install_fonts
+        ;;
     *)
         echo "Usage: $0 {setup|create|list|delete} [version]"
         echo "  setup   : Setup hooks for commit, checkout, and merge"
         echo "  create  : Create a new release with the provided version"
         echo "  list    : List all existing releases"
+        echo "  build   : Compile the TeX document using latexmk and xelatex"
+        echo "  installfonts: Download and install Marianne and Roboto Mono fonts into fonts/"
         echo "  delete  : Delete the release with the provided version"
         echo "  version : Optional argument specifying the version for create and delete commands"
         exit 1

@@ -5,6 +5,21 @@
             "tools": [
                 "xelatexmk"
             ]
+        },
+        {
+            "name": "Build",
+            "tools": [
+                "XeTeX"
+            ]
+        },
+        {
+            "name": "Build (bib)",
+            "tools": [
+                "XeTeX",
+                "BibTeX",
+                "XeTeX",
+                "XeTeX"
+            ]
         }
     ],
     "latex-workshop.latex.tools": [
@@ -25,6 +40,7 @@
             "name": "xelatexmk",
             "command": "latexmk",
             "args": [
+                "--shell-escape",
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-file-line-error",
@@ -41,6 +57,24 @@
                 "%DOCFILE%"
             ],
             "env": {}
+        },
+        {
+            "name": "XeTeX",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-shell-escape",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "BibTeX",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
         }
     ]
 }

@@ -21,3 +21,12 @@ presentation.template.chl
 presentation.template.lof
 presentation.template.lot
 presentation.template.pdf
+poster.template.synctex(busy)
+svg-inkscape/
+build/
+*.zip
+*.dvi
+poster.template.pdf
+*.html
+__MACOSX/
+.DS_Store
