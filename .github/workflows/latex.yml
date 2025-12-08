@@ -145,6 +145,21 @@ jobs:
             !./.DS_Store*
             !./.gitignore*
 
+      - name: Add PDF to Job Summary
+        run: |
+          echo "## 📄 Compiled PDFs" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Document | Pages | Size |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|------|" >> $GITHUB_STEP_SUMMARY
+          pdf_pages=$(pdfinfo ${{ needs.workflow-setup.outputs.pdf }} 2>/dev/null | grep "Pages:" | awk '{print $2}' || echo "N/A")
+          pdf_size=$(ls -lh ${{ needs.workflow-setup.outputs.pdf }} | awk '{print $5}')
+          echo "| 🎯 Presentation | $pdf_pages | $pdf_size |" >> $GITHUB_STEP_SUMMARY
+          poster_pages=$(pdfinfo poster.template.pdf 2>/dev/null | grep "Pages:" | awk '{print $2}' || echo "N/A")
+          poster_size=$(ls -lh poster.template.pdf | awk '{print $5}')
+          echo "| 📋 Poster | $poster_pages | $poster_size |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Artifact**: \`${{ needs.workflow-setup.outputs.prefixwithref }}\`" >> $GITHUB_STEP_SUMMARY
+
   check:
     needs: [build_latex, workflow-setup]
     runs-on: ${{ needs.workflow-setup.outputs.runner }}
