@@ -80,8 +80,8 @@ jobs:
 
       - name: Install fonts
         run: |
-          # Clear any stale cached fonts from previous runs
-          rm -rf fonts
+          # Install Roboto fonts alongside the committed Marianne fonts
+          # Don't delete fonts/ - it contains Marianne fonts committed to the repo
           article-cli install-fonts
 
       - name: Compile LaTeX document (ubuntu-latest)
