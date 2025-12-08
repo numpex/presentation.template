@@ -145,6 +145,18 @@ jobs:
             !./.DS_Store*
             !./.gitignore*
 
+      - name: Upload Presentation PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ needs.workflow-setup.outputs.pdf }}
+          path: ${{ needs.workflow-setup.outputs.pdf }}
+
+      - name: Upload Poster PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: poster.template.pdf
+          path: poster.template.pdf
+
       - name: Add PDF to Job Summary
         run: |
           echo "## 📄 Compiled PDFs" >> $GITHUB_STEP_SUMMARY
