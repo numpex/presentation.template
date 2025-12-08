@@ -39,7 +39,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     % White headline background (5cm tall)
     \fill[white] (current page.north west) rectangle ([yshift=-5cm] current page.north east);
-    
+
     % Left logos
     \node[anchor=north west, inner sep=0.5cm] at (current page.north west)
       {%
@@ -69,14 +69,14 @@
   \begin{tikzpicture}[remember picture,overlay]
     % White footline background (2cm tall)
     \fill[white] (current page.south west) rectangle ([yshift=2cm] current page.south east);
-    
+
     % Left logos in footline (scaled to 1.5cm height)
     \node[anchor=south west, inner sep=0.5cm] at (current page.south west)
       {%
         \includegraphics[height=1.5cm]{images/rf.png}\hspace{0.2cm}%
         \includegraphics[height=1.5cm]{images/f2030.png}%
       };
-    
+
     % Right logos in footline (scaled to 1.5cm height)
     \node[anchor=south east, inner sep=0.5cm] at (current page.south east)
       {%
@@ -84,7 +84,7 @@
         \includegraphics[height=1.5cm]{images/inria.png}\hspace{0.2cm}%
         \includegraphics[height=1.5cm]{images/cnrs.png}%
       };
-    
+
     % Centered footline text (e.g. institute and date)
     \node[anchor=south] at ([yshift=0.5cm] current page.south)
       {\parbox{\paperwidth}{\centering
@@ -118,11 +118,11 @@
     % Use a centered minipage 90% of the poster width
     \begin{minipage}{0.9\paperwidth}
       \begin{columns}[t,totalwidth=\textwidth]
-        
+
         % Column 1
         \column{0.32\textwidth}
           \begin{block}{Theme Overview}
-            The NumPEx theme is a Beamer theme with minimal visual noise inspired by the HSRM theme. It emphasizes a clean design with elegant typography (using the Marianne font, so XeTeX is required).  
+            The NumPEx theme is a Beamer theme with minimal visual noise inspired by the HSRM theme. It emphasizes a clean design with elegant typography (using the Marianne font, so XeTeX is required).
             \vspace{0.3cm}
             \textbf{Enable the theme by loading:}
             \begin{verbatim}
@@ -134,9 +134,9 @@
               \alert{\href{https://www.info.gouv.fr/marque-de-letat}{Charte graphique de l'Etat Français}}
             \end{center}
           \end{block}
-          
+
           \vspace{0.5cm}
-          
+
           \begin{block}{Sections \& Typography}
             Sections group slides on the same topic. For example:
             \begin{verbatim}
@@ -147,9 +147,10 @@
               \item \emph{Emphasis} on key text.
               \item \alert{Accents} on important parts.
               \item \textbf{Bold} for results.
+              \item Also \textbf{\emph{combine}} the previous ones.
             \end{itemize}
           \end{block}
-        
+
         % Column 2
         \column{0.32\textwidth}
           \begin{block}{Lists, Descriptions \& Animation}
@@ -173,9 +174,9 @@
               \item And now this.
             \end{itemize}
           \end{block}
-          
+
           \vspace{0.5cm}
-          
+
           \begin{block}{Tables}
             \begin{table}
               \caption{Largest cities in the world (source: Wikipedia)}
@@ -191,14 +192,14 @@
               \end{tabular}
             \end{table}
           \end{block}
-        
+
         % Column 3
         \column{0.32\textwidth}
           \begin{block}{Blocks \& Math}
             \begin{block}{Simple Block}
               Hello
             \end{block}
-            
+
             \vspace{0.3cm}
             \textbf{Mathematics:}
             \[
@@ -209,7 +210,7 @@
           \begin{exampleblock}{Example Block}
             Hello
           \end{exampleblock}
-     
+
           \vspace{0.5cm}
           \begin{block}{Line Plots \& Bar Charts}
             \textbf{Line Plot:}
@@ -246,11 +247,11 @@
                 \end{axis}
               \end{tikzpicture}
             \end{center}
-          
+
           \end{block}
-          
+
           \vspace{0.5cm}
-          
+
           \begin{exampleblock}{Code Example}
             \begin{lstlisting}[basicstyle=\tt\scriptsize, showlines=true]
               program pippo
@@ -271,7 +272,7 @@
               \url{https://github.com/numpex/presentation.template/}
             \end{center}
           \end{block}
-          
+
       \end{columns}
     \end{minipage}
   \end{center}
