@@ -2,91 +2,145 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15113190.svg)](https://doi.org/10.5281/zenodo.15113190)
 [![GitHub Release](https://img.shields.io/github/v/release/numpex/presentation.template)](https://github.com/numpex/presentation.template/releases/latest)
+[![PyPI - article-cli](https://img.shields.io/pypi/v/article-cli?label=article-cli)](https://pypi.org/project/article-cli/)
 [![Slack](https://img.shields.io/badge/slack-presentation-brightgreen.svg?logo=slack)](https://numpex.slack.com/archives/C08L4KHUTFX)
 [![Slack](https://img.shields.io/badge/slack-notifications-blue.svg?logo=slack)](https://numpex.slack.com/archives/C08KRJF3B55)
 
 
 ## Getting Started
 
-Just clone the repository, add the path to your `TEXINPUTS` environment variable, and you are ready to use the theme in your presentation by adding:
+This template uses [article-cli](https://pypi.org/project/article-cli/) for project management.
+
+### Installation
+
+```bash
+pip install article-cli
+```
+
+### Quick Start
+
+Clone the repository and add the path to your `TEXINPUTS` environment variable, then use the theme in your presentation:
 
 ```latex
 \usetheme{numpex}
 ```
 
-### Slides template
+### Slides Template
 
-Checkout `presentation.template.tex`:
+Compile `presentation.template.tex`:
 
-```shell
-bash a.cli build presentation.template.tex
+```bash
+article-cli compile --engine xelatex presentation.template.tex
 ```
 
-### Poster template
+### Poster Template
 
-Checkout `poster.template.tex`:
+Compile `poster.template.tex`:
 
-```shell
-bash a.cli build poster.template.tex
+```bash
+article-cli compile --engine xelatex poster.template.tex
 ```
 
 ## Fonts
 
-For a better result, you should install the [Marianne font](https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-de-l-identite-de-l-etat/typographie/) and compile with XeTeX.
+For the best result, you should install the [Marianne font](https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-de-l-identite-de-l-etat/typographie/) and compile with XeLaTeX.
 
-### Installing Marianne Fonts
+### Installing Fonts
 
-1. **Download the Fonts:**
-   - You can download the Marianne fonts using the provided `a.cli` script. Run the following command:
-     ```bash
-     bash a.cli installfonts
-     ```
-   - This will download and extract the Marianne fonts into the `fonts/` directory within your project.
+Install the required fonts (Marianne and Roboto) using article-cli:
 
-2. **Configure LaTeX:**
-   - Ensure your LaTeX configuration points to the `fonts/` directory. The provided `beamerfontthemenumpex` package is already configured to use the relative path `fonts/`.
+```bash
+article-cli install-fonts
+```
+
+This downloads and extracts the fonts into the `fonts/` directory within your project. The `beamerfontthemenumpex` package is already configured to use fonts from this relative path.
+
+### Manual Font Configuration
+
+If you prefer manual installation, ensure your LaTeX configuration points to the `fonts/` directory.
+
+## Using This Theme in Other Projects
+
+You can install this theme in any LaTeX project using article-cli:
+
+```bash
+# Install the numpex theme (default)
+article-cli install-theme numpex
+
+# Or install from a custom URL
+article-cli install-theme --url https://github.com/numpex/presentation.template.d/archive/refs/heads/main.zip
+
+# List available themes
+article-cli install-theme --list
+```
 
 ## CI/CD Pipeline
 
-This repository includes a GitHub Actions workflow to compile the LaTeX document and release the PDF artifact. The workflow is triggered on pushes to branches and tags.
+This repository includes a GitHub Actions workflow that uses article-cli to compile LaTeX documents and create releases. The workflow is triggered on pushes to branches and tags.
 
 ### Workflow Steps
 
-1. **Workflow Setup:**
-   - Determines the appropriate runner (`ubuntu-latest` or `self-texlive`) based on the availability of a self-hosted runner with the `self-texlive` label.
-
-2. **Build LaTeX:**
-   - Compiles the LaTeX document using `latexmk` and `xelatex`.
-   - Renames the generated PDF to include the branch or tag name.
-
-3. **Check:**
-   - Downloads the artifact and verifies that the LaTeX document compiles correctly from the artifact.
-
-4. **Release:**
-   - Creates a GitHub release for tagged commits (e.g., `v1.0.0`).
-   - Uploads the PDF and other relevant files as release assets.
+1. **Setup:** Installs Python and article-cli
+2. **Install Fonts:** Downloads required fonts using `article-cli install-fonts`
+3. **Build LaTeX:** Compiles documents using XeLaTeX via `article-cli compile`
+4. **Release:** Creates GitHub releases for tagged commits (e.g., `v1.0.0`)
 
 ## Usage
 
-- **Setup Hooks:**
-  ```bash
-  bash a.cli setup
-  ```
+### Setup Project
 
-- **Create a Release:**
-  ```bash
-  bash a.cli create v1.0.0
-  ```
+```bash
+article-cli setup
+```
 
-- **List Releases:**
-  ```bash
-  bash a.cli list
-  ```
+### Compile Documents
 
-- **Compile the Document:**
-  ```bash
-  bash a.cli build your_document.tex
-  ```
+```bash
+# Compile with XeLaTeX (required for custom fonts)
+article-cli compile --engine xelatex presentation.template.tex
+
+# Compile all .tex files in the project
+article-cli compile --engine xelatex
+```
+
+### Create a Release
+
+```bash
+article-cli create v1.0.0
+```
+
+### List Releases
+
+```bash
+article-cli list
+```
+
+### Clean Build Artifacts
+
+```bash
+article-cli clean
+```
+
+## Configuration
+
+Project settings are managed in `pyproject.toml`:
+
+```toml
+[tool.article-cli]
+[project]
+type = "presentation"
+
+[latex]
+engine = "xelatex"
+
+[fonts]
+enabled = true
+install_dir = "fonts"
+```
+
+## Legacy Script
+
+The old `a.cli` bash script is still available for backward compatibility but is deprecated. Please migrate to article-cli for new projects.
 
 ## Contributing
 

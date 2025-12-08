@@ -1,0 +1,38 @@
+[project]
+name = "presentation-template"
+version = "1.0.0"
+description = "NumPEx Beamer presentation template"
+
+[tool.article-cli]
+# Project configuration
+[tool.article-cli.project]
+type = "presentation"
+
+[tool.article-cli.presentation]
+theme = "numpex"
+aspect_ratio = "169"
+
+[tool.article-cli.documents]
+main = "presentation.template.tex"
+additional = ["poster.template.tex"]
+
+[tool.article-cli.latex]
+engine = "xelatex"
+shell_escape = true
+build_dir = "build"
+
+[tool.article-cli.workflow]
+output_dir = "build"
+fonts_dir = "fonts"
+install_fonts = true
+
+[tool.article-cli.git]
+default_branch = "main"
+
+[tool.article-cli.fonts]
+directory = "fonts"
+# Use GitHub releases for reliable font downloads
+sources = [
+    { name = "Roboto", url = "https://github.com/googlefonts/roboto/releases/download/v2.138/roboto-unhinted.zip", description = "Google's sans-serif font family" },
+    { name = "Roboto Mono", url = "https://github.com/googlefonts/RobotoMono/archive/refs/heads/main.zip", description = "Google's monospace font, good for code" }
+]
