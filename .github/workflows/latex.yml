@@ -72,7 +72,7 @@ jobs:
 
       - name: Install article-cli
         run: |
-          pip install article-cli>=1.3.1
+          pip install --no-cache-dir article-cli>=1.3.1
 
       - name: Setup git hooks
         run: |
@@ -176,7 +176,7 @@ jobs:
       - name: Install article-cli (self-hosted)
         if: ${{ needs.workflow-setup.outputs.runner == 'self-texlive' }}
         run: |
-          pip install article-cli>=1.3.0
+          pip install --no-cache-dir article-cli>=1.3.1
 
       - name: Check compilation (self-hosted)
         if: ${{ needs.workflow-setup.outputs.runner == 'self-texlive' }}
