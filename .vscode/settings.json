@@ -1,4 +1,8 @@
 {
+    "[typst]": {
+        "editor.defaultFormatter": "myriad-dreamin.tinymist",
+        "editor.formatOnSave": true
+    },
     "latex-workshop.latex.recipes": [
         {
             "name": "xelatex",
