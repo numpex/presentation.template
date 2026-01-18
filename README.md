@@ -78,6 +78,11 @@ brew install typstfmt
 From the repository root:
 
 ```bash
+# Using article-cli (recommended)
+article-cli compile presentation.template.typ
+article-cli compile poster.template.typ
+
+# Or using typst directly
 typst compile presentation.template.typ --root .
 typst compile poster.template.typ --root .
 ```
@@ -108,26 +113,20 @@ Typst uses the fonts installed on your system. For best results, install **Maria
 
 ### Typst fonts (repo-local, no system install)
 
-If you want a fully local setup (use the committed fonts in `fonts/` without installing anything into macOS Font Book), use Typst with explicit font paths.
-
-This repository provides helper scripts and VS Code tasks that pass:
-
-- `--font-path fonts/Marianne/desktop`
-- `--font-path fonts/Roboto/static`
-
-CLI:
+If you want a fully local setup (use the committed fonts in `fonts/` without installing anything into macOS Font Book), use Typst with explicit font paths via article-cli:
 
 ```bash
-./scripts/typst-compile.sh presentation.template.typ
-./scripts/typst-watch.sh presentation.template.typ
+# Compile with local fonts
+article-cli compile presentation.template.typ --font-path fonts/Marianne/desktop --font-path fonts/Roboto/static
+
+# Watch mode with local fonts
+article-cli compile presentation.template.typ --watch --font-path fonts/Marianne/desktop --font-path fonts/Roboto/static
+
+# Compile poster
+article-cli compile poster.template.typ --font-path fonts/Marianne/desktop --font-path fonts/Roboto/static
 ```
 
-VS Code:
-
-- Run **Terminal → Run Task…**
-- Choose **Typst: watch presentation (local fonts)** or **Typst: watch poster (local fonts)**
-
-This gives you automatic rebuilds and correct fonts without system installation. You can open the generated PDF in any viewer while `typst watch` runs.
+This gives you automatic rebuilds and correct fonts without system installation.
 
 ### Manual Font Configuration
 
@@ -211,10 +210,6 @@ engine = "xelatex"
 enabled = true
 install_dir = "fonts"
 ```
-
-## Legacy Script
-
-The old `a.cli` bash script is still available for backward compatibility but is deprecated. Please migrate to article-cli for new projects.
 
 ## Contributing
 
