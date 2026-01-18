@@ -1,4 +1,4 @@
-# A Beamer Template for NumPEx Presentations
+# NumPEx Presentation & Poster Templates (LaTeX + Typst)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15113190.svg)](https://doi.org/10.5281/zenodo.15113190)
 [![GitHub Release](https://img.shields.io/github/v/release/numpex/presentation.template)](https://github.com/numpex/presentation.template/releases/latest)
@@ -41,6 +41,53 @@ Compile `poster.template.tex`:
 article-cli compile --engine xelatex poster.template.tex
 ```
 
+## Typst (VS Code)
+
+This repository also includes Typst equivalents:
+
+- Presentation: `presentation.template.typ`
+- Poster: `poster.template.typ`
+
+### Recommended VS Code extension
+
+Install **Tinymist Typst** (`myriad-dreamin.tinymist`). It provides syntax highlighting, diagnostics, formatting, and the preview.
+
+This repo already ships a minimal formatter setup in `.vscode/settings.json`.
+
+### Install Typst (macOS)
+
+The most reliable setup is to install the Typst compiler via Homebrew:
+
+```bash
+brew install typst
+```
+
+Optional:
+
+```bash
+brew install typstfmt
+```
+
+### Does it compile automatically?
+
+- When the **Preview** is open, Tinymist typically re-compiles on edits/saves.
+- If the preview is blank, it usually means there is a compilation error.
+
+### Preview and build from the CLI
+
+From the repository root:
+
+```bash
+typst compile presentation.template.typ --root .
+typst compile poster.template.typ --root .
+```
+
+### Blank preview troubleshooting
+
+- Open the **Problems** panel (compilation errors show up there).
+- Open the **Output** panel and select **Tinymist** to see the compiler logs.
+- Make sure you preview the entrypoint (`presentation.template.typ` or `poster.template.typ`), not the theme/library file.
+
 ## Fonts
 
 For the best result, you should install the [Marianne font](https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-de-l-identite-de-l-etat/typographie/) and compile with XeLaTeX.
@@ -54,6 +101,33 @@ article-cli install-fonts
 ```
 
 This downloads and extracts the fonts into the `fonts/` directory within your project. The `beamerfontthemenumpex` package is already configured to use fonts from this relative path.
+
+### Typst fonts
+
+Typst uses the fonts installed on your system. For best results, install **Marianne** (and a mono font like **Roboto Mono**) system-wide.
+
+### Typst fonts (repo-local, no system install)
+
+If you want a fully local setup (use the committed fonts in `fonts/` without installing anything into macOS Font Book), use Typst with explicit font paths.
+
+This repository provides helper scripts and VS Code tasks that pass:
+
+- `--font-path fonts/Marianne/desktop`
+- `--font-path fonts/Roboto/static`
+
+CLI:
+
+```bash
+./scripts/typst-compile.sh presentation.template.typ
+./scripts/typst-watch.sh presentation.template.typ
+```
+
+VS Code:
+
+- Run **Terminal → Run Task…**
+- Choose **Typst: watch presentation (local fonts)** or **Typst: watch poster (local fonts)**
+
+This gives you automatic rebuilds and correct fonts without system installation. You can open the generated PDF in any viewer while `typst watch` runs.
 
 ### Manual Font Configuration
 
